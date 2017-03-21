@@ -1,0 +1,539 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api-documentation for
+    <a
+
+        href="https://github.com/typicode/json-server"
+
+    >json-server (v0.9.6)</a>
+</h1>
+<h4>Serves JSON files through REST routes.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.json-server">module json-server</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.create">
+            function <span class="apidocSignatureSpan">json-server.</span>create
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.defaults">
+            function <span class="apidocSignatureSpan">json-server.</span>defaults
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.rewriter">
+            function <span class="apidocSignatureSpan">json-server.</span>rewriter
+            <span class="apidocSignatureSpan">(routes)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.router">
+            function <span class="apidocSignatureSpan">json-server.</span>router
+            <span class="apidocSignatureSpan">(source)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">json-server.</span>bodyParser</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.json-server.bodyParser">module json-server.bodyParser</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.bodyParser.0">
+            function <span class="apidocSignatureSpan">json-server.bodyParser.</span>0
+            <span class="apidocSignatureSpan">(req, res, next)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.bodyParser.1">
+            function <span class="apidocSignatureSpan">json-server.bodyParser.</span>1
+            <span class="apidocSignatureSpan">(req, res, next)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.json-server" id="apidoc.module.json-server">module json-server</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.create" id="apidoc.element.json-server.create">
+        function <span class="apidocSignatureSpan">json-server.</span>create
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function create() {
+  return express().set(&#x27;json spaces&#x27;, 2);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```sh
+$ npm install json-server --save-dev
+```
+
+```js
+// server.js
+var jsonServer = require(&#x27;json-server&#x27;)
+var server = jsonServer.<span class="apidocCodeKeywordSpan">create</span>()
+var router = jsonServer.router(&#x27;db.json&#x27;)
+var middlewares = jsonServer.defaults()
+
+server.use(middlewares)
+server.use(router)
+server.listen(3000, function () {
+console.log(&#x27;JSON Server is running&#x27;)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.defaults" id="apidoc.element.json-server.defaults">
+        function <span class="apidocSignatureSpan">json-server.</span>defaults
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">defaults = function (opts) {
+  var userDir = path.join(process.cwd(), &#x27;public&#x27;);
+  var defaultDir = path.join(__dirname, &#x27;public&#x27;);
+  var staticDir = fs.existsSync(userDir) ? userDir : defaultDir;
+
+  opts = objectAssign({ logger: true, static: staticDir }, opts);
+
+  var arr = [];
+
+  // Compress all requests
+  if (!opts.noGzip) {
+    arr.push(compression());
+  }
+
+  // Logger
+  if (opts.logger) {
+    arr.push(logger(&#x27;dev&#x27;, {
+      skip: function skip(req) {
+        return process.env.NODE_ENV === &#x27;test&#x27; || req.path === &#x27;/favicon.ico&#x27;;
+      }
+    }));
+  }
+
+  // Enable CORS for all the requests, including static files
+  if (!opts.noCors) {
+    arr.push(cors({ origin: true, credentials: true }));
+  }
+
+  if (process.env.NODE_ENV === &#x27;development&#x27;) {
+    // only use in development
+    arr.push(errorhandler());
+  }
+
+  // Serve static files
+  arr.push(express.static(opts.static));
+
+  // No cache for IE
+  // https://support.microsoft.com/en-us/kb/234067
+  arr.push(function (req, res, next) {
+    res.header(&#x27;Cache-Control&#x27;, &#x27;no-cache&#x27;);
+    res.header(&#x27;Pragma&#x27;, &#x27;no-cache&#x27;);
+    res.header(&#x27;Expires&#x27;, &#x27;-1&#x27;);
+    next();
+  });
+
+  // Read-only
+  if (opts.readOnly) {
+    arr.push(function (req, res, next) {
+      if (req.method === &#x27;GET&#x27;) {
+        next(); // Continue
+      } else {
+        res.sendStatus(403); // Forbidden
+      }
+    });
+  }
+
+  return arr;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+```js
+// server.js
+var jsonServer = require(&#x27;json-server&#x27;)
+var server = jsonServer.create()
+var router = jsonServer.router(&#x27;db.json&#x27;)
+var middlewares = jsonServer.<span class="apidocCodeKeywordSpan">defaults</span>()
+
+server.use(middlewares)
+server.use(router)
+server.listen(3000, function () {
+  console.log(&#x27;JSON Server is running&#x27;)
+})
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.rewriter" id="apidoc.element.json-server.rewriter">
+        function <span class="apidocSignatureSpan">json-server.</span>rewriter
+        <span class="apidocSignatureSpan">(routes)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">rewriter = function (routes) {
+  var router = express.Router();
+
+  router.get(&#x27;/__rules&#x27;, function (req, res) {
+    res.json(routes);
+  });
+
+  Object.keys(routes).forEach(function (route) {
+    if (route.indexOf(&#x27;:&#x27;) !== -1) {
+      router.all(route, function (req, res, next) {
+        // Rewrite target url using params
+        var target = routes[route];
+        for (var param in req.params) {
+          target = target.replace(&#x27;:&#x27; + param, req.params[param]);
+        }
+        req.url = target;
+        req.query = updateQueryString(req.query, req.url);
+        next();
+      });
+    } else {
+      router.all(route + &#x27;*&#x27;, function (req, res, next) {
+        // Rewrite url by replacing prefix
+        req.url = req.url.replace(route, routes[route]);
+        req.query = updateQueryString(req.query, req.url);
+        next();
+      });
+    }
+  });
+
+  return router;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+   body: res.locals.data
+  })
+}
+```
+
+#### Rewriter example
+
+To add rewrite rules, use `jsonServer.<span class="apidocCodeKeywordSpan">rewriter</span>()`:
+
+```javascript
+// Add this before server.use(router)
+server.use(jsonServer.rewriter({
+  &#x27;/api/&#x27;: &#x27;/&#x27;,
+  &#x27;/blog/:resource/:id/show&#x27;: &#x27;/:resource/:id&#x27;
+}))
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.router" id="apidoc.element.json-server.router">
+        function <span class="apidocSignatureSpan">json-server.</span>router
+        <span class="apidocSignatureSpan">(source)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">router = function (source) {
+  // Create router
+  var router = express.Router();
+
+  // Add middlewares
+  router.use(methodOverride());
+  router.use(bodyParser);
+
+  // Create database
+  var db = void 0;
+  if (_.isObject(source)) {
+    db = low();
+    db.setState(source);
+  } else {
+    db = low(source, { storage: fileAsync });
+  }
+
+  validateData(db.getState());
+
+  // Add lodash-id methods to db
+  db._.mixin(lodashId);
+
+  // Add specific mixins
+  db._.mixin(mixins);
+
+  // Expose database
+  router.db = db;
+
+  // Expose render
+  router.render = function (req, res) {
+    res.jsonp(res.locals.data);
+  };
+
+  // GET /db
+  router.get(&#x27;/db&#x27;, function (req, res) {
+    res.jsonp(db.getState());
+  });
+
+  // Handle /:parent/:parentId/:resource
+  router.use(nested());
+
+  // Create routes
+  db.forEach(function (value, key) {
+    if (_.isPlainObject(value)) {
+      router.use(&#x27;/&#x27; + key, singular(db, key));
+      return;
+    }
+
+    if (_.isArray(value)) {
+      router.use(&#x27;/&#x27; + key, plural(db, key));
+      return;
+    }
+
+    var msg = &#x27;Type of &#x22;&#x27; + key + &#x27;&#x22; (&#x27; + (typeof value === &#x27;undefined&#x27; ? &#x27;undefined&#x27; : _typeof(value)) + &#x27;) &#x27; + (_.isObject(source
+) ? &#x27;&#x27; : &#x27;in &#x27; + source) + &#x27; is not supported. &#x27; + &#x27;Use objects or arrays of objects.&#x27;;
+
+    throw new Error(msg);
+  }).value();
+
+  router.use(function (req, res) {
+    if (!res.locals.data) {
+      res.status(404);
+      res.locals.data = {};
+    }
+
+    router.render(req, res);
+  });
+
+  router.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send(err.stack);
+  });
+
+  return router;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+$ npm install json-server --save-dev
+```
+
+```js
+// server.js
+var jsonServer = require(&#x27;json-server&#x27;)
+var server = jsonServer.create()
+var router = jsonServer.<span class="apidocCodeKeywordSpan">router</span>(&#x27;db.json&#x27;)
+var middlewares = jsonServer.defaults()
+
+server.use(middlewares)
+server.use(router)
+server.listen(3000, function () {
+  console.log(&#x27;JSON Server is running&#x27;)
+})
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.json-server.bodyParser" id="apidoc.module.json-server.bodyParser">module json-server.bodyParser</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.bodyParser.0" id="apidoc.element.json-server.bodyParser.0">
+        function <span class="apidocSignatureSpan">json-server.bodyParser.</span>0
+        <span class="apidocSignatureSpan">(req, res, next)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jsonParser(req, res, next) {
+  if (req._body) {
+    debug(&#x27;body already parsed&#x27;)
+    next()
+    return
+  }
+
+  req.body = req.body || {}
+
+  // skip requests without bodies
+  if (!typeis.hasBody(req)) {
+    debug(&#x27;skip empty body&#x27;)
+    next()
+    return
+  }
+
+  debug(&#x27;content-type %j&#x27;, req.headers[&#x27;content-type&#x27;])
+
+  // determine if request should be parsed
+  if (!shouldParse(req)) {
+    debug(&#x27;skip parsing&#x27;)
+    next()
+    return
+  }
+
+  // assert charset per RFC 7159 sec 8.1
+  var charset = getCharset(req) || &#x27;utf-8&#x27;
+  if (charset.substr(0, 4) !== &#x27;utf-&#x27;) {
+    debug(&#x27;invalid charset&#x27;)
+    next(createError(415, &#x27;unsupported charset &#x22;&#x27; + charset.toUpperCase() + &#x27;&#x22;&#x27;, {
+      charset: charset
+    }))
+    return
+  }
+
+  // read
+  read(req, res, next, parse, debug, {
+    encoding: charset,
+    inflate: inflate,
+    limit: limit,
+    verify: verify
+  })
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.bodyParser.1" id="apidoc.element.json-server.bodyParser.1">
+        function <span class="apidocSignatureSpan">json-server.bodyParser.</span>1
+        <span class="apidocSignatureSpan">(req, res, next)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function urlencodedParser(req, res, next) {
+  if (req._body) {
+    debug(&#x27;body already parsed&#x27;)
+    next()
+    return
+  }
+
+  req.body = req.body || {}
+
+  // skip requests without bodies
+  if (!typeis.hasBody(req)) {
+    debug(&#x27;skip empty body&#x27;)
+    next()
+    return
+  }
+
+  debug(&#x27;content-type %j&#x27;, req.headers[&#x27;content-type&#x27;])
+
+  // determine if request should be parsed
+  if (!shouldParse(req)) {
+    debug(&#x27;skip parsing&#x27;)
+    next()
+    return
+  }
+
+  // assert charset
+  var charset = getCharset(req) || &#x27;utf-8&#x27;
+  if (charset !== &#x27;utf-8&#x27;) {
+    debug(&#x27;invalid charset&#x27;)
+    next(createError(415, &#x27;unsupported charset &#x22;&#x27; + charset.toUpperCase() + &#x27;&#x22;&#x27;, {
+      charset: charset
+    }))
+    return
+  }
+
+  // read
+  read(req, res, next, parse, debug, {
+    debug: debug,
+    encoding: charset,
+    inflate: inflate,
+    limit: limit,
+    verify: verify
+  })
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
