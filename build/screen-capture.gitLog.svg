@@ -1,11 +1,13 @@
-<svg height="126" width="720" xmlns="http://www.w3.org/2000/svg">
-<rect height="126" fill="#555" width="720"></rect>
+<svg height="158" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="158" fill="#555" width="720"></rect>
 <text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
-<tspan x="10" y="26">2017-03-26 17:28:38 +0800u000a[npm publishAfterCommit]</tspan>
-<tspan x="10" y="42">2017-03-25 11:47:31 +0000u000a[npm publishAfterCommit]</tspan>
-<tspan x="10" y="58"></tspan>
-<tspan x="10" y="74">2017-03-25 10:52:40 +0000u000a[npm publishAfterCommitAfterBuild]</tspan>
+<tspan x="10" y="26">2017-03-26 10:00:58 +0000u000a[npm publishAfterCommit]</tspan>
+<tspan x="10" y="42"></tspan>
+<tspan x="10" y="58">2017-03-26 17:28:38 +0800u000a[npm publishAfterCommit]</tspan>
+<tspan x="10" y="74">2017-03-25 11:47:31 +0000u000a[npm publishAfterCommit]</tspan>
 <tspan x="10" y="90"></tspan>
-<tspan x="10" y="106">2014-03-26 02:31:50 +0700u000aadd blank README.md</tspan>
+<tspan x="10" y="106">2017-03-25 10:52:40 +0000u000a[npm publishAfterCommitAfterBuild]</tspan>
+<tspan x="10" y="122"></tspan>
+<tspan x="10" y="138">2014-03-26 02:31:50 +0700u000aadd blank README.md</tspan>
 </text>
 </svg>
