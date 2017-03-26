@@ -2880,6 +2880,25 @@ local.templateApidocMd = '\
             options.modeNext = 0;
             options.onNext();
         };
+
+        local.contentTouchList = function (options, onError) {
+        /*
+         * this function will touch options.urlList in parallel
+         * https://developer.github.com/v3/repos/contents/#update-a-file
+         */
+            var onParallel;
+            onParallel = local.onParallel(onError);
+            onParallel.counter += 1;
+            options.urlList.forEach(function (url) {
+                onParallel.counter += 1;
+                local.contentTouch({
+                    message: options.message,
+                    modeErrorIgnore: true,
+                    url: url
+                }, onParallel);
+            });
+            onParallel();
+        };
         break;
     }
     switch (local.modeJs) {
@@ -2929,11 +2948,22 @@ local.templateApidocMd = '\
                 console.assert(!error, error);
             });
             break;
-        // touch
+        // touch file
         case 'touch':
             local.contentTouch({
                 message: process.argv[4],
                 url: process.argv[3]
+            }, function (error) {
+                // validate no error occurred
+                console.assert(!error, error);
+            });
+            break;
+        case 'touchlist':
+            local.contentTouchList({
+                message: process.argv[4],
+                urlList: process.argv[3].split(' ').filter(function (element) {
+                    return element;
+                })
             }, function (error) {
                 // validate no error occurred
                 console.assert(!error, error);
@@ -11849,7 +11879,7 @@ header: '\
 [![NPM](https://nodei.co/npm/{{env.npm_package_name}}.png?downloads=true)](https://www.npmjs.com/package/{{env.npm_package_name}}) \
 \n\
 \n\
-[![apidoc](https://npmdoc.github.io/node-npmdoc-{{env.npm_package_name}}/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-{{env.npm_package_name encodeURIComponent alphanumeric}}_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-{{env.npm_package_name}}/build..beta..travis-ci.org/apidoc.html) \
+[![apidoc](https://npmdoc.github.io/node-npmdoc-{{env.npm_package_name}}/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-{{env.npm_package_name}}_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-{{env.npm_package_name}}/build..beta..travis-ci.org/apidoc.html) \
 \n\
 \n\
 ![package-listing](https://npmdoc.github.io/node-npmdoc-{{env.npm_package_name}}/build/screen-capture.npmPackageListing.svg) \
