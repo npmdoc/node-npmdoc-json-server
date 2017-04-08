@@ -92,7 +92,7 @@
 <tspan x="10" y="1434">  │ ├─┬ form-data@2.1.2 </tspan>
 <tspan x="10" y="1450">  │ │ └── asynckit@0.4.0 </tspan>
 <tspan x="10" y="1466">  │ ├─┬ har-validator@4.2.1 </tspan>
-<tspan x="10" y="1482">  │ │ ├─┬ ajv@4.11.5 </tspan>
+<tspan x="10" y="1482">  │ │ ├─┬ ajv@4.11.6 </tspan>
 <tspan x="10" y="1498">  │ │ │ ├── co@4.6.0 </tspan>
 <tspan x="10" y="1514">  │ │ │ └─┬ json-stable-stringify@1.0.1 </tspan>
 <tspan x="10" y="1530">  │ │ │   └── jsonify@0.0.0 </tspan>
@@ -182,7 +182,7 @@
 <tspan x="10" y="2874">  │ │   │ ├── unzip-response@1.0.2 </tspan>
 <tspan x="10" y="2890">  │ │   │ └─┬ url-parse-lax@1.0.0 </tspan>
 <tspan x="10" y="2906">  │ │   │   └── prepend-http@1.0.4 </tspan>
-<tspan x="10" y="2922">  │ │   ├─┬ registry-auth-token@3.1.1 </tspan>
+<tspan x="10" y="2922">  │ │   ├─┬ registry-auth-token@3.1.2 </tspan>
 <tspan x="10" y="2938">  │ │   │ └─┬ rc@1.2.1 </tspan>
 <tspan x="10" y="2954">  │ │   │   ├── deep-extend@0.4.1 </tspan>
 <tspan x="10" y="2970">  │ │   │   ├── ini@1.3.4 </tspan>
