@@ -89,10 +89,10 @@
 <tspan x="10" y="1386">  │ │ └── delayed-stream@1.0.0 </tspan>
 <tspan x="10" y="1402">  │ ├── extend@3.0.0 </tspan>
 <tspan x="10" y="1418">  │ ├── forever-agent@0.6.1 </tspan>
-<tspan x="10" y="1434">  │ ├─┬ form-data@2.1.2 </tspan>
+<tspan x="10" y="1434">  │ ├─┬ form-data@2.1.4 </tspan>
 <tspan x="10" y="1450">  │ │ └── asynckit@0.4.0 </tspan>
 <tspan x="10" y="1466">  │ ├─┬ har-validator@4.2.1 </tspan>
-<tspan x="10" y="1482">  │ │ ├─┬ ajv@4.11.6 </tspan>
+<tspan x="10" y="1482">  │ │ ├─┬ ajv@4.11.7 </tspan>
 <tspan x="10" y="1498">  │ │ │ ├── co@4.6.0 </tspan>
 <tspan x="10" y="1514">  │ │ │ └─┬ json-stable-stringify@1.0.1 </tspan>
 <tspan x="10" y="1530">  │ │ │   └── jsonify@0.0.0 </tspan>
@@ -109,7 +109,7 @@
 <tspan x="10" y="1706">  │ │ │ ├── extsprintf@1.0.2 </tspan>
 <tspan x="10" y="1722">  │ │ │ ├── json-schema@0.2.3 </tspan>
 <tspan x="10" y="1738">  │ │ │ └── verror@1.3.6 </tspan>
-<tspan x="10" y="1754">  │ │ └─┬ sshpk@1.11.0 </tspan>
+<tspan x="10" y="1754">  │ │ └─┬ sshpk@1.13.0 </tspan>
 <tspan x="10" y="1770">  │ │   ├── asn1@0.2.3 </tspan>
 <tspan x="10" y="1786">  │ │   ├── assert-plus@1.0.0 </tspan>
 <tspan x="10" y="1802">  │ │   ├── bcrypt-pbkdf@1.0.1 </tspan>
@@ -152,7 +152,7 @@
 <tspan x="10" y="2394">  │ │ ├── os-tmpdir@1.0.2 </tspan>
 <tspan x="10" y="2410">  │ │ ├── osenv@0.1.4 </tspan>
 <tspan x="10" y="2426">  │ │ ├── uuid@2.0.3 </tspan>
-<tspan x="10" y="2442">  │ │ └─┬ write-file-atomic@1.3.1 </tspan>
+<tspan x="10" y="2442">  │ │ └─┬ write-file-atomic@1.3.3 </tspan>
 <tspan x="10" y="2458">  │ │   ├── imurmurhash@0.1.4 </tspan>
 <tspan x="10" y="2474">  │ │   └── slide@1.1.6 </tspan>
 <tspan x="10" y="2490">  │ ├── is-npm@1.0.0 </tspan>
@@ -171,7 +171,7 @@
 <tspan x="10" y="2698">  │ │   │ │ └─┬ error-ex@1.3.1 </tspan>
 <tspan x="10" y="2714">  │ │   │ │   └── is-arrayish@0.2.1 </tspan>
 <tspan x="10" y="2730">  │ │   │ ├── read-all-stream@3.1.0 </tspan>
-<tspan x="10" y="2746">  │ │   │ ├─┬ readable-stream@2.2.8 </tspan>
+<tspan x="10" y="2746">  │ │   │ ├─┬ readable-stream@2.2.9 </tspan>
 <tspan x="10" y="2762">  │ │   │ │ ├── buffer-shims@1.0.0 </tspan>
 <tspan x="10" y="2778">  │ │   │ │ ├── core-util-is@1.0.2 </tspan>
 <tspan x="10" y="2794">  │ │   │ │ ├── isarray@1.0.0 </tspan>
@@ -182,7 +182,7 @@
 <tspan x="10" y="2874">  │ │   │ ├── unzip-response@1.0.2 </tspan>
 <tspan x="10" y="2890">  │ │   │ └─┬ url-parse-lax@1.0.0 </tspan>
 <tspan x="10" y="2906">  │ │   │   └── prepend-http@1.0.4 </tspan>
-<tspan x="10" y="2922">  │ │   ├─┬ registry-auth-token@3.1.2 </tspan>
+<tspan x="10" y="2922">  │ │   ├─┬ registry-auth-token@3.2.0 </tspan>
 <tspan x="10" y="2938">  │ │   │ └─┬ rc@1.2.1 </tspan>
 <tspan x="10" y="2954">  │ │   │   ├── deep-extend@0.4.1 </tspan>
 <tspan x="10" y="2970">  │ │   │   ├── ini@1.3.4 </tspan>
@@ -213,8 +213,8 @@
 <tspan x="10" y="3370">    │   │ ├── pify@2.3.0 </tspan>
 <tspan x="10" y="3386">    │   │ └─┬ strip-bom@2.0.0 </tspan>
 <tspan x="10" y="3402">    │   │   └── is-utf8@0.2.1 </tspan>
-<tspan x="10" y="3418">    │   ├─┬ normalize-package-data@2.3.6 </tspan>
-<tspan x="10" y="3434">    │   │ ├── hosted-git-info@2.4.1 </tspan>
+<tspan x="10" y="3418">    │   ├─┬ normalize-package-data@2.3.8 </tspan>
+<tspan x="10" y="3434">    │   │ ├── hosted-git-info@2.4.2 </tspan>
 <tspan x="10" y="3450">    │   │ ├─┬ is-builtin-module@1.0.0 </tspan>
 <tspan x="10" y="3466">    │   │ │ └── builtin-modules@1.1.1 </tspan>
 <tspan x="10" y="3482">    │   │ └─┬ validate-npm-package-license@3.0.1 </tspan>

@@ -96,6 +96,24 @@
 
         </li>
 
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">json-server.</span>is</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">json-server.</span>mixins</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">json-server.</span>utils</span>
+
+        </li>
+
     </ol></li>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.json-server.bodyParser">module json-server.bodyParser</a><ol>
@@ -114,6 +132,81 @@
             <a class="apidocElementLiA" href="#apidoc.element.json-server.bodyParser.1">
             function <span class="apidocSignatureSpan">json-server.bodyParser.</span>1
             <span class="apidocSignatureSpan">(req, res, next)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.json-server.is">module json-server.is</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.is.JS">
+            function <span class="apidocSignatureSpan">json-server.is.</span>JS
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.is.JSON">
+            function <span class="apidocSignatureSpan">json-server.is.</span>JSON
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.is.URL">
+            function <span class="apidocSignatureSpan">json-server.is.</span>URL
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.json-server.mixins">module json-server.mixins</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.mixins.createId">
+            function <span class="apidocSignatureSpan">json-server.mixins.</span>createId
+            <span class="apidocSignatureSpan">(coll)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.mixins.deepQuery">
+            function <span class="apidocSignatureSpan">json-server.mixins.</span>deepQuery
+            <span class="apidocSignatureSpan">(value, q)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.mixins.getRemovable">
+            function <span class="apidocSignatureSpan">json-server.mixins.</span>getRemovable
+            <span class="apidocSignatureSpan">(db)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.json-server.utils">module json-server.utils</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.json-server.utils.getPage">
+            function <span class="apidocSignatureSpan">json-server.utils.</span>getPage
+            <span class="apidocSignatureSpan">(array, page, perPage)</span>
             </a>
 
         </li>
@@ -406,6 +499,12 @@ server.listen(3000, function () {
 
 
 
+
+
+
+
+
+
 </div>
 
 <div class="apidocSectionDiv">
@@ -519,6 +618,291 @@ server.listen(3000, function () {
   })
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.json-server.is" id="apidoc.module.json-server.is">module json-server.is</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.is.JS" id="apidoc.element.json-server.is.JS">
+        function <span class="apidocSignatureSpan">json-server.is.</span>JS
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function JS(s) {
+  return !URL(s) &amp;&amp; /\.js$/.test(s);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  json: true
+};
+
+request(opts, function (err, response) {
+  if (err) return cb(err);
+  cb(null, response.body);
+});
+  } else if (is.<span class="apidocCodeKeywordSpan">JS</span>(source)) {
+// Clear cache
+var filename = path.resolve(source);
+delete require.cache[filename];
+var dataFn = require(filename);
+
+if (typeof dataFn !== 'function') {
+  throw new Error('The database is a JavaScript file but the export is not a function.');
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.is.JSON" id="apidoc.element.json-server.is.JSON">
+        function <span class="apidocSignatureSpan">json-server.is.</span>JSON
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function JSON(s) {
+  return !URL(s) &amp;&amp; /\.json$/.test(s);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+function createApp(source, object, routes, middlewares, argv) {
+var app = jsonServer.create();
+
+var router = void 0;
+
+try {
+  router = jsonServer.router(is.<span class="apidocCodeKeywordSpan">JSON</span>(source) ? source : object);
+} catch (e) {
+  console.log();
+  console.error(chalk.red(e.message.replace(/^/gm, '  ')));
+  process.exit(1);
+}
+
+var defaultsOpts = {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.is.URL" id="apidoc.element.json-server.is.URL">
+        function <span class="apidocSignatureSpan">json-server.is.</span>URL
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function URL(s) {
+  return (/^(http|https):/.test(s)
+  );
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    if (argv.watch) {
+      (function () {
+console.log(chalk.gray('  Watching...'));
+console.log();
+var source = argv._[0];
+
+// Can't watch URL
+if (is.<span class="apidocCodeKeywordSpan">URL</span>(source)) throw new Error('Can\'t watch URL');
+
+// Watch .js or .json file
+// Since lowdb uses atomic writing, directory is watched instead of file
+var watchedDir = path.dirname(source);
+var readError = false;
+fs.watch(watchedDir, function (event, file) {
+  // https://github.com/typicode/json-server/issues/420
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.json-server.mixins" id="apidoc.module.json-server.mixins">module json-server.mixins</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.mixins.createId" id="apidoc.element.json-server.mixins.createId">
+        function <span class="apidocSignatureSpan">json-server.mixins.</span>createId
+        <span class="apidocSignatureSpan">(coll)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createId(coll) {
+  var _ = this;
+  var idProperty = _.__id();
+  if (_.isEmpty(coll)) {
+    return 1;
+  } else {
+    var id = _(coll).maxBy(idProperty)[idProperty];
+
+    // Increment integer id or generate string id
+    return _.isFinite(id) ? ++id : shortid.generate();
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.mixins.deepQuery" id="apidoc.element.json-server.mixins.deepQuery">
+        function <span class="apidocSignatureSpan">json-server.mixins.</span>deepQuery
+        <span class="apidocSignatureSpan">(value, q)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function deepQuery(value, q) {
+  var _ = this;
+  if (value &amp;&amp; q) {
+    if (_.isArray(value)) {
+      for (var i = 0; i &lt; value.length; i++) {
+        if (_.deepQuery(value[i], q)) {
+          return true;
+        }
+      }
+    } else if (_.isObject(value) &amp;&amp; !_.isArray(value)) {
+      for (var k in value) {
+        if (_.deepQuery(value[k], q)) {
+          return true;
+        }
+      }
+    } else if (value.toString().toLowerCase().indexOf(q) !== -1) {
+      return true;
+    }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+function deepQuery(value, q) {
+var _ = this;
+if (value &amp;&amp; q) {
+  if (_.isArray(value)) {
+    for (var i = 0; i &lt; value.length; i++) {
+      if (_.<span class="apidocCodeKeywordSpan">deepQuery</span>(value[i], q)) {
+        return true;
+      }
+    }
+  } else if (_.isObject(value) &amp;&amp; !_.isArray(value)) {
+    for (var k in value) {
+      if (_.deepQuery(value[k], q)) {
+        return true;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.mixins.getRemovable" id="apidoc.element.json-server.mixins.getRemovable">
+        function <span class="apidocSignatureSpan">json-server.mixins.</span>getRemovable
+        <span class="apidocSignatureSpan">(db)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getRemovable(db) {
+  var _ = this;
+  var removable = [];
+  _.each(db, function (coll, collName) {
+    _.each(coll, function (doc) {
+      _.each(doc, function (value, key) {
+        if (/Id$/.test(key)) {
+          var refName = pluralize.plural(key.slice(0, -2));
+          // Test if table exists
+          if (db[refName]) {
+            // Test if references is defined in table
+            var ref = _.getById(db[refName], value);
+            if (_.isUndefined(ref)) {
+              removable.push({ name: collName, id: doc.id });
+            }
+          }
+        }
+      });
+    });
+  });
+
+  return removable;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  }
+
+  // DELETE /name/:id
+  function destroy(req, res, next) {
+var resource = db.get(name).removeById(req.params.id).value();
+
+// Remove dependents documents
+var removable = db._.<span class="apidocCodeKeywordSpan">getRemovable</span>(db.getState());
+
+removable.forEach(function (item) {
+  db.get(item.name).removeById(item.id).value();
+});
+
+if (resource) {
+  res.locals.data = {};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.json-server.utils" id="apidoc.module.json-server.utils">module json-server.utils</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.json-server.utils.getPage" id="apidoc.element.json-server.utils.getPage">
+        function <span class="apidocSignatureSpan">json-server.utils.</span>getPage
+        <span class="apidocSignatureSpan">(array, page, perPage)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getPage(array, page, perPage) {
+  var obj = {};
+  var start = (page - 1) * perPage;
+  var end = page * perPage;
+
+  obj.items = array.slice(start, end);
+  if (obj.items.length === 0) {
+    return obj;
+  }
+
+  if (page &gt; 1) {
+    obj.prev = page - 1;
+  }
+
+  if (end &lt; array.length) {
+    obj.next = page + 1;
+  }
+
+  if (obj.items.length !== array.length) {
+    obj.current = page;
+    obj.first = 1;
+    obj.last = Math.ceil(array.length / perPage);
+  }
+
+  return obj;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count' + (_page ? ', Link' : ''));
+    }
+
+    if (_page) {
+_page = parseInt(_page, 10);
+_page = _page &gt;= 1 ? _page : 1;
+_limit = parseInt(_limit, 10) || 10;
+var page = utils.<span class="apidocCodeKeywordSpan">getPage</span>(chain.value(), _page, _limit);
+var links = {};
+var fullURL = getFullURL(req);
+
+if (page.first) {
+  links.first = fullURL.replace('page=' + page.current, 'page=' + page.first);
+}
+...</pre></li>
     </ul>
 
 
